@@ -78,10 +78,11 @@ public class DataConex {
 
         Timestamp timestamp = new Timestamp(0L);
 
+        query = "INSERT INTO " + tableName + "(" + aux1 + ") VALUES(" + aux2 + ")";
+        preparedStatement = connection.prepareStatement(query);
+
         for(int i = 0; i < data.size(); i++){
 
-            query = "INSERT INTO " + tableName + "(" + aux1 + ") VALUES(" + aux2 + ")";
-            preparedStatement = connection.prepareStatement(query);
             for(int j = 0; j < columnType.size();j++){
 
                 if(columnType.get(j) == 2){
@@ -96,8 +97,8 @@ public class DataConex {
             }
 
             preparedStatement.executeUpdate();
-            preparedStatement.close();
         }
+        preparedStatement.close();
     }
     private void dropTables(Statement statement) throws SQLException {
         statement.executeQuery(Queries.dropTables);
